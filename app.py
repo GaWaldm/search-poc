@@ -4,6 +4,13 @@ from langchain_huggingface import HuggingFaceEmbeddings
 from langdetect import detect
 from config import CHROMA_PATH, EMBEDDING_MODEL
 from rag import ask
+from ingest_pdf import index_pdfs
+import os
+
+if not os.path.exists(CHROMA_PATH) or not os.listdir(CHROMA_PATH):
+    with st.spinner("Index wird aufgebaut... (einmalig, ca. 2 Minuten)"):
+        index_pdfs()
+        
 SUPPORTED_LANGUAGES = ["de", "fr", "it", "en", "rm"]
 
 # Übersetzungen
@@ -167,7 +174,7 @@ def load_db():
 with st.spinner(t["loading"]):
     db = load_db()
 
-total = db._collection.count()
+total = len(db.get()["ids"])
 st.caption(f"{total} {t['indexed']}")
 
 # Suchfeld
