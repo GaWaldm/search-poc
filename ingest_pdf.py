@@ -81,7 +81,7 @@ def index_pdfs():
             "language": language,
             "slug": filename,
             "content_type": "pdf",
-            "last_updated": "",
+            "last_updated": "2026-05-11",
             "source": filepath
         } for _ in chunks]
 
