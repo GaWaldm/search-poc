@@ -87,10 +87,14 @@ def index_pdfs():
 
         # In bestehenden Index hinzufügen
         # Bestehende PDF-Chunks für diese Datei entfernen
-        existing = db.get(where={"document_id": filename})
-        if existing and existing["ids"]:
-            print(f"  → Entferne {len(existing['ids'])} bestehende Chunks für {filename}")
-            db.delete(ids=existing["ids"])
+        # Bestehende PDF-Chunks für diese Datei entfernen
+        try:
+            existing = db.get(where={"document_id": filename})
+            if existing and existing["ids"]:
+                print(f"  → Entferne {len(existing['ids'])} bestehende Chunks für {filename}")
+                db.delete(ids=existing["ids"])
+        except:
+            pass
 
         # Neue Chunks hinzufügen
         db.add_texts(texts=chunks, metadatas=metadatas)
