@@ -1,6 +1,10 @@
 config.py
+__pycache__/
+*.pyc
+.envconfig.py
 data/chroma/
 data/pdfs/
+config.py.save
 __pycache__/
 *.pyc
 .env
