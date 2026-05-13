@@ -2,7 +2,7 @@ import streamlit as st
 from langchain_chroma import Chroma
 from langchain_huggingface import HuggingFaceEmbeddings
 from langdetect import detect
-from config import CHROMA_PATH, EMBEDDING_MODEL
+from config import CHROMA_PATH, EMBEDDING_MODEL, SITE_BASE_URL
 from rag import ask
 from ingest_pdf import index_pdfs
 import os
@@ -68,7 +68,7 @@ LANG_LABELS = {"de": "Deutsch", "fr": "Français", "it": "Italiano", "en": "Engl
 
 # Seite konfigurieren
 st.set_page_config(
-    page_title="Bundessuche",
+    page_title="Semantic Search",
     page_icon="🇨🇭",
     layout="centered"
 )
@@ -77,7 +77,7 @@ st.set_page_config(
 st.markdown("""
 <style>
     .header-bar {
-        background-color: #D4141C;
+        background-color: #2f4356;
         padding: 12px 20px;
         display: flex;
         align-items: center;
@@ -253,24 +253,49 @@ if query:
         if not results:
             st.warning(t["no_results"])
         else:
-            st.markdown(f"**{len(results)} {t['results_found']}**")
-
+            # Treffer nach Dokument gruppieren
+            grouped = {}
             for result in results:
-                lang = result.metadata.get("language", "")
-                title = result.metadata.get("title", "Ohne Titel")
-                content_type = result.metadata.get("content_type", "")
-                text = result.page_content
+                doc_id = result.metadata.get("document_id", "")
+                if doc_id not in grouped:
+                    source = result.metadata.get("source", "")
+                    slug = result.metadata.get("slug", "")
+                    lang = result.metadata.get("language", "de")
+                    if source.startswith("http"):
+                        source_url = source
+                    elif slug:
+                        source_url = f"{SITE_BASE_URL}/{lang}/{slug}"
+                    else:
+                        source_url = ""
+                    grouped[doc_id] = {
+                        "title": result.metadata.get("title", "Ohne Titel"),
+                        "language": lang,
+                        "content_type": result.metadata.get("content_type", ""),
+                        "last_updated": result.metadata.get("last_updated", "")[:10],
+                        "best_chunk": result.page_content,
+                        "source_url": source_url,
+                        "chunk_count": 1
+                    }
+                else:
+                    grouped[doc_id]["chunk_count"] += 1
+
+            st.markdown(f"**{len(grouped)} {t['results_found']}**")
+
+            for doc_id, doc in grouped.items():
+                lang = doc["language"]
                 flag = FLAGS.get(lang, "🌐")
-                updated = result.metadata.get("last_updated", "")[:10]
+                count = doc["chunk_count"]
+                count_label = f" · {count} relevante Abschnitte" if count > 1 else ""
 
                 st.markdown(f"""
                 <div class="result-card">
-                    <div class="result-title">{flag} {title}</div>
+                    <div class="result-title">{flag} {doc['title']}</div>
                     <div class="result-meta">
-                        {LANG_LABELS.get(lang, lang)} · {content_type} · 
-                        {t['updated']}: {updated}
+                        {LANG_LABELS.get(lang, lang)} · {doc['content_type']} · 
+                        {t['updated']}: {doc['last_updated']}{count_label}
                     </div>
-                    <div class="result-text">{text[:400]}...</div>
+                    <div class="result-text">{doc['best_chunk'][:400]}...</div>
+                    {f'<a href="{doc["source_url"]}" target="_blank" style="display:inline-flex;align-items:center;gap:6px;margin-top:8px;font-size:13px;color:#D4141C;text-decoration:none;">&#128279; Zur Quelle</a>' if doc.get("source_url") else ""}
                 </div>
                 """, unsafe_allow_html=True)
 
