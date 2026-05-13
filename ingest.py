@@ -1,10 +1,10 @@
 import requests
 import json
 import html
-from config import LIVINGDOCS_API_URL, LIVINGDOCS_API_TOKEN
+from config import HCMS_API_URL, HCMS_API_TOKEN, SITE_BASE_URL
 
-BASE_URL = "https://prod-sandbox01-hcms.scs.scs-sdweb.ch"
-HEADERS = {"Authorization": f"Bearer {LIVINGDOCS_API_TOKEN}"}
+BASE_URL = SITE_BASE_URL
+HEADERS = {"Authorization": f"Bearer {HCMS_API_TOKEN}"}
 
 # Komponenten die Referenzen enthalten
 REFERENCE_COMPONENTS = {
@@ -18,9 +18,9 @@ REFERENCE_COMPONENTS = {
 SKIP_COMPONENTS = {"image"}
 
 def fetch_articles(limit=10):
-    """Artikel von Livingdocs API abrufen"""
+    """Artikel von HCMS API abrufen"""
     print(f"Abrufen von {limit} Artikeln...")
-    response = requests.get(LIVINGDOCS_API_URL, headers=HEADERS, params={"limit": limit})
+    response = requests.get(HCMS_API_URL, headers=HEADERS, params={"limit": limit})
     
     if response.status_code != 200:
         print(f"Fehler: {response.status_code}")
