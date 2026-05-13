@@ -10,13 +10,13 @@ import os
 if not os.path.exists(CHROMA_PATH) or not os.listdir(CHROMA_PATH):
     with st.spinner("Index wird aufgebaut... (einmalig, ca. 2 Minuten)"):
         index_pdfs()
-        
+
 SUPPORTED_LANGUAGES = ["de", "fr", "it", "en", "rm"]
 
 # Übersetzungen
 TRANSLATIONS = {
     "de": {
-        "title": "Bundessuche — Prototyp",
+        "title": "Intelligente Suche - grins — Prototyp",
         "subtitle": "Semantische Suche über Inhalte der Bundesverwaltung",
         "indexed": "Inhalte indexiert · Mehrsprachig (DE / FR / IT)",
         "placeholder": "Ihre Frage in natürlicher Sprache — z.B. «Wie beantrage ich einen Schweizer Pass?»",
@@ -31,7 +31,7 @@ TRANSLATIONS = {
         "footer": "Prototyp · Semantische Suche auf Basis von Livingdocs · Powered by sentence-transformers & Chroma"
     },
     "fr": {
-        "title": "Recherche fédérale — Prototype",
+        "title": "Recherche intelligente — Prototype",
         "subtitle": "Recherche sémantique sur les contenus de l'administration fédérale",
         "indexed": "contenus indexés · Multilingue (DE / FR / IT)",
         "placeholder": "Votre question en langage naturel — p.ex. «Comment demander un passeport suisse?»",
@@ -46,7 +46,7 @@ TRANSLATIONS = {
         "footer": "Prototype · Recherche sémantique basée sur Livingdocs · Powered by sentence-transformers & Chroma"
     },
     "it": {
-        "title": "Ricerca federale — Prototipo",
+        "title": "Ricerca intelligente — Prototipo",
         "subtitle": "Ricerca semantica sui contenuti dell'amministrazione federale",
         "indexed": "contenuti indicizzati · Multilingue (DE / FR / IT)",
         "placeholder": "La sua domanda in linguaggio naturale — es. «Come richiedere un passaporto svizzero?»",
