@@ -17,7 +17,7 @@ SUPPORTED_LANGUAGES = ["de", "fr", "it", "en", "rm"]
 TRANSLATIONS = {
     "de": {
         "title": "Intelligente Suche - grins — Prototyp",
-        "subtitle": "Semantische Suche über Inhalte Webinhalte",
+        "subtitle": "Semantische Suche über Inhalte eines Webauftrittes",
         "indexed": "Inhalte indexiert · Mehrsprachig (DE / FR / IT)",
         "placeholder": "Ihre Frage in natürlicher Sprache — z.B. «Wie beantrage ich einen Schweizer Pass?»",
         "only_my_lang": "Nur meine Sprache",
