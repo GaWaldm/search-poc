@@ -17,7 +17,7 @@ SUPPORTED_LANGUAGES = ["de", "fr", "it", "en", "rm"]
 TRANSLATIONS = {
     "de": {
         "title": "Intelligente Suche - grins — Prototyp",
-        "subtitle": "Semantische Suche über Inhalte der Bundesverwaltung",
+        "subtitle": "Semantische Suche über Inhalte Webinhalte",
         "indexed": "Inhalte indexiert · Mehrsprachig (DE / FR / IT)",
         "placeholder": "Ihre Frage in natürlicher Sprache — z.B. «Wie beantrage ich einen Schweizer Pass?»",
         "only_my_lang": "Nur meine Sprache",
@@ -28,11 +28,11 @@ TRANSLATIONS = {
         "updated": "Aktualisiert",
         "no_results": "Keine Treffer gefunden — bitte anders formulieren.",
         "loading": "Suche wird geladen...",
-        "footer": "Prototyp · Semantische Suche auf Basis von Livingdocs · Powered by sentence-transformers & Chroma"
+        "footer": "Prototyp · Semantische Suche auf Basis HCMS · Powered by sentence-transformers & Chroma"
     },
     "fr": {
         "title": "Recherche intelligente — Prototype",
-        "subtitle": "Recherche sémantique sur les contenus de l'administration fédérale",
+        "subtitle": "Recherche sémantique sur les contenus d'une site web'",
         "indexed": "contenus indexés · Multilingue (DE / FR / IT)",
         "placeholder": "Votre question en langage naturel — p.ex. «Comment demander un passeport suisse?»",
         "only_my_lang": "Uniquement ma langue",
@@ -43,11 +43,11 @@ TRANSLATIONS = {
         "updated": "Mis à jour",
         "no_results": "Aucun résultat — veuillez reformuler votre question.",
         "loading": "Chargement de la recherche...",
-        "footer": "Prototype · Recherche sémantique basée sur Livingdocs · Powered by sentence-transformers & Chroma"
+        "footer": "Prototype · Recherche sémantique basée sur un HCMS · Powered by sentence-transformers & Chroma"
     },
     "it": {
         "title": "Ricerca intelligente — Prototipo",
-        "subtitle": "Ricerca semantica sui contenuti dell'amministrazione federale",
+        "subtitle": "Ricerca semantica sui contenuti del un sito web",
         "indexed": "contenuti indicizzati · Multilingue (DE / FR / IT)",
         "placeholder": "La sua domanda in linguaggio naturale — es. «Come richiedere un passaporto svizzero?»",
         "only_my_lang": "Solo la mia lingua",
@@ -58,7 +58,7 @@ TRANSLATIONS = {
         "updated": "Aggiornato",
         "no_results": "Nessun risultato — si prega di riformulare la domanda.",
         "loading": "Caricamento della ricerca...",
-        "footer": "Prototipo · Ricerca semantica basata su Livingdocs · Powered by sentence-transformers & Chroma"
+        "footer": "Prototipo · Ricerca semantica basata su un HCMS · Powered by sentence-transformers & Chroma"
     }
 }
 
